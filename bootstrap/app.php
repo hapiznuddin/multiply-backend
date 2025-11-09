@@ -26,7 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
                 // API group
         $middleware->api(prepend: [
-            EnsureFrontendRequestsAreStateful::class,
+            // EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
 

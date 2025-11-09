@@ -14,6 +14,6 @@ class VerifyCsrfToken
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'api/*', 
     ];
 }

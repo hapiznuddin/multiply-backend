@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,5 +12,5 @@ use Illuminate\Support\Facades\Route;
     // ------------------ Get Data ----------------------//
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('logout', [AuthController::class, 'logOut']);
-        // Route::get('get-user', 'AuthenticationController@userInfo')->name('get-user');
+        Route::get('get-user', [UserController::class, 'userInfo']);
     });
