@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -14,7 +15,8 @@ class UserController extends Controller
     public function userInfo()
     {
         try {
-            $user = User::where('id', auth()->user()->id)->first();
+            $id = Auth::user();
+            $user = User::where('id', $id->id)->first();
             return response()->json($user);
         
         } catch (\Exception $e) {
