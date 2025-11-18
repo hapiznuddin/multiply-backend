@@ -63,4 +63,19 @@ class User extends Authenticatable
             }
         });
     }
+
+    public function materials()
+    {
+        return $this->hasMany(Material::class);
+    }
+
+    public function questionsSets()
+    {
+        return $this->hasMany(QuestionSet::class);
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }
