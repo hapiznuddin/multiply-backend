@@ -15,7 +15,10 @@ class QuestionController extends Controller
     {
         $data = $request->validated();
         $question = $this->service->create($data);
-        return response()->json($question->load('options'), 201);
+        return response()->json([
+            'question' => $question->load('options'), 
+            'message' => 'Question created successfully'
+        ], 201);
     }
 
     public function show($id): JsonResponse
@@ -38,6 +41,8 @@ class QuestionController extends Controller
         $q = $this->service->find($id);
         abort_unless($q, 404);
         $this->service->delete($q);
-        return response()->json(null, 204);
+        return response()->json([
+            'message' => 'Question deleted successfully',
+        ], 204);
     }
 }

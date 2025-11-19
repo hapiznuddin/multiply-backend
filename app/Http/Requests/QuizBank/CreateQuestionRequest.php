@@ -24,9 +24,29 @@ class CreateQuestionRequest extends FormRequest
             'question_text'  => 'required|string',
             'type'           => ['required', Rule::in(['multiple_choice','input'])],
             'correct_answer' => 'required_if:type,input|nullable|string',
-            'options'        => 'required_if:type,multiple_choice|array|min:2',
-            'options.*.option_text' => 'required_with:options|string',
-            'options.*.is_correct'  => 'boolean',
+            'options'        => 'required_if:type,multiple_choice|present|array|min:2',
+            'options.*.option_text' => 'required|string',
+            'options.*.is_correct'  => 'required|boolean',
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+
+            if ($this->input('type') === 'multiple_choice') {
+
+                $options = $this->input('options', []);
+
+                // cek minimal 1 correct answer
+                $hasCorrect = collect($options)->contains(function ($opt) {
+                    return isset($opt['is_correct']) && $opt['is_correct'] === true;
+                });
+
+                if (! $hasCorrect) {
+                    $validator->errors()->add('options', 'Minimal satu opsi harus benar.');
+                }
+            }
+        });
     }
 }

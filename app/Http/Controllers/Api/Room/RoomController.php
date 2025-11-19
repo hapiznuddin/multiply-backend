@@ -18,7 +18,10 @@ class RoomController extends Controller
         $user = Auth::user();
         $data = array_merge($request->validated(), ['user_id' => $user->id]);
         $room = $this->service->create($data);
-        return response()->json($room, 201);
+        return response()->json([
+            'room' => $room,
+            'message' => 'Room created successfully'
+        ], 201);
     }
 
     public function start(Room $room): JsonResponse
