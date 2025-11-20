@@ -16,8 +16,8 @@ class QuestionOption extends Model
         'is_correct' => 'boolean',
     ];
 
-    public function question()
-    {
-        return $this->belongsTo(Question::class);
-    }
+public function question()
+{
+    return $this->belongsTo(\App\Models\Question::class, 'question_id');
+}
 }

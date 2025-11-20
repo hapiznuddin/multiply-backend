@@ -17,13 +17,18 @@ class Material extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function questions()
-    {
-        return $this->hasMany(Question::class);
-    }
+public function questions()
+{
+    return $this->hasMany(\App\Models\Question::class, 'material_id');
+}
 
-    public function questionSets()
-    {
-        return $this->belongsToMany(QuestionSet::class, 'question_set_materials');
-    }
+public function questionSets()
+{
+    return $this->belongsToMany(
+        Material::class,
+        'question_set_materials', // <-- nama pivot table kamu
+        'question_set_id',       // FK di pivot ke question_sets
+        'material_id'            // FK di pivot ke materials
+    );
+}
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services\QuizBank;
 
+use App\Models\Material;
 use App\Repositories\Contracts\QuestionRepositoryInterface;
 use App\Models\Question;
 use Illuminate\Support\Facades\DB;
@@ -76,6 +77,21 @@ class QuestionService
             return $question->load('options');
         });
     }
+
+    public function getMultipleChoiceByMaterial(Material $material)
+{
+    return $material->questions()
+        ->where('type', 'multiple_choice')
+        ->with('options')
+        ->get();
+}
+
+public function getInputByMaterial(Material $material)
+{
+    return $material->questions()
+        ->where('type', 'input')
+        ->get();
+}
 
     public function delete(Question $question): void
     {

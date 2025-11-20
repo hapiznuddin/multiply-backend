@@ -11,47 +11,66 @@ use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
-    public function __construct(protected RoomService $service) {}
+    public function __construct(
+        protected RoomService $service
+    ) {}
+
+    public function index(): JsonResponse
+    {
+        return response()->json(
+            $this->service->listForUser(Auth::id())
+        );
+    }
 
     public function store(CreateRoomRequest $request): JsonResponse
     {
-        $user = Auth::user();
-        $data = array_merge($request->validated(), ['user_id' => $user->id]);
-        $room = $this->service->create($data);
+        $room = $this->service->create(
+            $request->validated(),
+            Auth::id()
+        );
+
         return response()->json([
             'room' => $room,
             'message' => 'Room created successfully'
         ], 201);
     }
 
+    public function show(Room $room): JsonResponse
+    {
+        return response()->json(
+            $room->load('questionSet.materials')
+        );
+    }
+
+
     public function start(Room $room): JsonResponse
     {
-        $user = Auth::user();
-        if ($room->user_id !== $user->id) {
+        if ($room->user_id !== Auth::id()) {
             return response()->json(['message' => 'Forbidden'], 403);
         }
-        $r = $this->service->start($room);
-        return response()->json($r);
+
+        return response()->json(
+            $this->service->start($room)
+        );
     }
 
     public function finish(Room $room): JsonResponse
     {
-        $user = Auth::user();
-        if ($room->user_id !== $user->id) {
+        if ($room->user_id !== Auth::id()) {
             return response()->json(['message' => 'Forbidden'], 403);
         }
-        $r = $this->service->finish($room);
-        return response()->json($r);
+
+        return response()->json(
+            $this->service->finish($room)
+        );
     }
 
-    // Public: fetch questions for the room (for players)
     public function questions(Room $room): JsonResponse
     {
-        $qs = $room->questionSet->materials()
-            ->with(['questions.options'])
-            ->get()
-            ->flatMap->questions;
-        return response()->json($qs);
+        return response()->json([
+        'room_code' => $room->code,
+        'questions' => $this->service->getQuestions($room)
+    ]);
     }
 }
 

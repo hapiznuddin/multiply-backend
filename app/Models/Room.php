@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $fillable = [
-        'teacher_id',
+        'user_id',
         'question_set_id',
         'code',
         'status',
         'starts_at',
         'finished_at',
+        'title',
+        'max_players'
     ];
 
     protected $casts = [

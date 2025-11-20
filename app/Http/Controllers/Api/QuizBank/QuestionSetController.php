@@ -14,8 +14,10 @@ class QuestionSetController extends Controller
 
     public function index(): JsonResponse
     {
-        $user = Auth::user();
-        $sets = $user->questionSets->with('materials')->get();
+        $sets = Auth::user()
+            ->questionSets()
+            ->with('materials')
+            ->get();
         return response()->json($sets);
     }
 

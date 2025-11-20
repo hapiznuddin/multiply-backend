@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\QuizBank;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QuizBank\CreateQuestionRequest;
+use App\Models\Material;
 use App\Services\QuizBank\QuestionService;
 use Illuminate\Http\JsonResponse;
 
@@ -27,6 +28,20 @@ class QuestionController extends Controller
         abort_unless($q, 404);
         return response()->json($q->load('options'));
     }
+
+public function multipleChoice(Material $material)
+{
+    return response()->json(
+        $this->service->getMultipleChoiceByMaterial($material)
+    );
+}
+
+public function input(Material $material)
+{
+    return response()->json(
+        $this->service->getInputByMaterial($material)
+    );
+}
 
     public function update(CreateQuestionRequest $request, $id): JsonResponse
     {

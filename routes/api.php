@@ -20,11 +20,17 @@ use App\Http\Controllers\Api\Room\LeaderboardController;
         Route::post('logout', [AuthController::class, 'logOut']);
         Route::get('get-user', [UserController::class, 'userInfo']);
         Route::apiResource('materials', MaterialController::class)->except(['show']);
-        Route::apiResource('questions', QuestionController::class)->except(['index']);
+        Route::apiResource('questions', QuestionController::class);
         Route::apiResource('question-sets', QuestionSetController::class);
-        Route::post('rooms', [RoomController::class, 'store']); // create room
-        Route::post('rooms/{room}/start', [RoomController::class, 'start']);
-        Route::post('rooms/{room}/finish', [RoomController::class, 'finish']);
+        Route::model('material', \App\Models\Material::class);
+        Route::get('material/{material}/questions/multiple-choice', [QuestionController::class, 'multipleChoice']);
+        Route::get('material/{material}/questions/input', [QuestionController::class, 'input']);
+        Route::prefix('rooms')->group(function () {
+            Route::get('/', [RoomController::class, 'index']);
+            Route::post('/', [RoomController::class, 'store']);
+            Route::get('/{room}', [RoomController::class, 'show']);
+            Route::get('/{room}/questions', [RoomController::class, 'questions']);
+        });
     });
 
     // Public endpoints (students can call)

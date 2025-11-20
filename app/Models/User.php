@@ -69,9 +69,9 @@ class User extends Authenticatable
         return $this->hasMany(Material::class);
     }
 
-    public function questionsSets()
+    public function questionSets()
     {
-        return $this->hasMany(QuestionSet::class);
+        return $this->hasMany(\App\Models\QuestionSet::class, 'user_id', 'id');
     }
 
     public function rooms()
