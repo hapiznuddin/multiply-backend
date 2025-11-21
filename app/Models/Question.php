@@ -13,13 +13,13 @@ class Question extends Model
         'correct_answer',
     ];
 
-    public function material()
-    {
-        return $this->belongsTo(Material::class);
-    }
+public function material()
+{
+    return $this->belongsTo(\App\Models\Material::class, 'material_id');
+}
 
-    public function options()
-    {
-        return $this->hasMany(QuestionOption::class);
-    }
+public function options()
+{
+    return $this->hasMany(\App\Models\QuestionOption::class, 'question_id');
+}
 }

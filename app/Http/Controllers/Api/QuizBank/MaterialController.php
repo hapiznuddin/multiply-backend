@@ -23,7 +23,10 @@ class MaterialController extends Controller
         $user = Auth::user();
         $data = array_merge($request->validated(), ['user_id' => $user->id]);
         $material = $this->service->create($data);
-        return response()->json($material, 201);
+        return response()->json([
+            'material' => $material,
+            'message' => 'Material created successfully',
+        ], 201);
     }
     public function update(CreateMaterialRequest $request, $id): JsonResponse
     {
@@ -38,7 +41,9 @@ class MaterialController extends Controller
         $material = $this->service->find($id);
         abort_unless($material, 404);
         $this->service->delete($material);
-        return response()->json(null, 204);
+        return response()->json([
+            'message' => 'Material deleted successfully',
+        ], 204);
     }
 }
 

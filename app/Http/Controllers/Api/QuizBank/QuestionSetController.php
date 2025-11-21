@@ -14,8 +14,10 @@ class QuestionSetController extends Controller
 
     public function index(): JsonResponse
     {
-        $user = Auth::user();
-        $sets = $user->questionSets->with('materials')->get();
+        $sets = Auth::user()
+            ->questionSets()
+            ->with('materials')
+            ->get();
         return response()->json($sets);
     }
 
@@ -24,7 +26,10 @@ class QuestionSetController extends Controller
         $user = Auth::user();
         $data = array_merge($request->validated(), ['user_id' => $user->id]);
         $set = $this->service->create($data);
-        return response()->json($set->load('materials'), 201);
+        return response()->json([
+            'question_set' => $set->load('materials'),
+            'message' => 'Question set created successfully'
+        ], 201);
     }
 
     public function show($id): JsonResponse
@@ -47,6 +52,8 @@ class QuestionSetController extends Controller
         $s = $this->service->find($id);
         abort_unless($s, 404);
         $s->delete();
-        return response()->json(null, 204);
+        return response()->json([
+            'message' => 'Question set deleted successfully',
+        ], 204);
     }
 }

@@ -19,8 +19,9 @@ class CreateRoomRequest extends FormRequest
      public function rules(): array
     {
         return [
-            'question_set_id' => 'required|integer|exists:question_sets,id',
-            'starts_at' => 'nullable|date',
+            'question_set_id' => 'required|exists:question_sets,id',
+            'title'           => 'required|string|max:255',
+            'max_players'     => 'nullable|integer|min:1|max:500',
         ];
     }
 }
