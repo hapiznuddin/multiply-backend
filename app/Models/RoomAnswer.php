@@ -6,14 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomAnswer extends Model
 {
-    protected $fillable = [
-        'room_id',
-        'participant_id',
-        'question_id',
-        'answer',
-        'is_correct',
-        'answered_at',
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'is_correct'  => 'boolean',

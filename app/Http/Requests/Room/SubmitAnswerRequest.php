@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Room;
 
+use App\Models\Question;
+use App\Models\QuestionOption;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SubmitAnswerRequest extends FormRequest
 {
@@ -20,9 +23,38 @@ class SubmitAnswerRequest extends FormRequest
     {
         return [
             'guest_token' => 'required|string',
-            'participant_id' => 'required|integer|exists:room_participants,id',
+            'room_participant_id' => 'required|integer|exists:room_participants,id',
             'question_id' => 'required|integer|exists:questions,id',
-            'answer' => 'required|string',
+
+            // answer dynamic: MCQ = integer option_id but stored as string, input = string
+            'answer' => ['required', function ($attribute, $value, $fail) {
+
+                $question = Question::find($this->question_id);
+                if (! $question) {
+                    return $fail("Invalid question.");
+                }
+
+                // MCQ
+                if ($question->type === 'multiple_choice') {
+                    if (!is_numeric($value)) {
+                        return $fail("Answer must be a valid option id.");
+                    }
+
+                    // Check option owner
+                    if (!QuestionOption::where('question_id', $question->id)
+                        ->where('id', $value)
+                        ->exists()) {
+                        return $fail("Invalid option for this question.");
+                    }
+                }
+
+                // INPUT
+                if ($question->type === 'input') {
+                    if (!is_string($value)) {
+                        return $fail("Answer must be text.");
+                    }
+                }
+            }]
         ];
     }
 }

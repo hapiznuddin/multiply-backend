@@ -19,8 +19,8 @@ class JoinRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|string',
-            'name' => 'required|string|max:100',
+            'room_code' => 'required|string|exists:rooms,code',
+            'participant_name' => 'required|string|max:255'
         ];
     }
 }

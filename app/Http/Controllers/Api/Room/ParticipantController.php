@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Api\Room;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Room\JoinRoomRequest;
+use App\Models\Room;
+use App\Models\RoomParticipant;
 use App\Services\Room\ParticipantService;
 use App\Repositories\Contracts\RoomRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 
 class ParticipantController extends Controller
 {
@@ -17,27 +20,22 @@ class ParticipantController extends Controller
 
     public function join(JoinRoomRequest $request): JsonResponse
     {
-        $r = $this->rooms->findByCode($request->input('code'));
-        if (! $r) {
-            return response()->json(['message' => 'Room not found'], 404);
-        }
+    $room = Room::where('code', $request->room_code)->firstOrFail();
 
-        // allow join only if waiting or running
-        if (! in_array($r->status, ['waiting','running'])) {
-            return response()->json(['message' => 'Room not accepting participants'], 422);
-        }
+    if (!in_array($room->status, ['active', 'started'])) {
+        return response()->json(['message' => 'Room not accepting participants'], 403);
+    }
 
-        $participant = $this->participants->create([
-            'room_id' => $r->id,
-            'name' => $request->input('name'),
-            'guest_token' => \Illuminate\Support\Str::uuid(),
-            'joined_at' => now(),
-        ]);
+    $participant = RoomParticipant::create([
+        'room_id'          => $room->id,
+        'participant_name' => $request->participant_name,
+        'guest_token'      => Str::uuid(),
+        'joined_at'        => now(),
+    ]);
 
-        return response()->json([
-            'participant' => $participant,
-            'room' => $r,
-            'guest_token' => $participant->guest_token,
-        ], 201);
+    return response()->json([
+        'message' => 'Joined successfully',
+        'participant' => $participant
+    ], 201);
     }
 }

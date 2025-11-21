@@ -6,14 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomParticipant extends Model
 {
-    protected $fillable = [
-        'room_id',
-        'name',
-        'guest_token',
-        'score',
-        'joined_at',
-        'finished_at',
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'joined_at'   => 'datetime',
