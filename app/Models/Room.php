@@ -12,6 +12,7 @@ class Room extends Model
         'code',
         'status',
         'starts_at',
+        'started_at',
         'finished_at',
         'title',
         'max_players'
@@ -19,6 +20,7 @@ class Room extends Model
 
     protected $casts = [
         'starts_at'   => 'datetime',
+        'started_at'  => 'datetime',
         'finished_at' => 'datetime',
     ];
 

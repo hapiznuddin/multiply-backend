@@ -24,9 +24,9 @@ class CreateQuestionRequest extends FormRequest
             'question_text'  => 'required|string',
             'type'           => ['required', Rule::in(['multiple_choice','input'])],
             'correct_answer' => 'required_if:type,input|nullable|string',
-            'options'        => 'required_if:type,multiple_choice|present|array|min:2',
-            'options.*.option_text' => 'required|string',
-            'options.*.is_correct'  => 'required|boolean',
+            'options'        => 'sometimes|required_if:type,multiple_choice|array',
+            'options.*.option_text' => 'required_if:type,multiple_choice|string',
+            'options.*.is_correct'  => 'required_if:type,multiple_choice|boolean',
         ];
     }
 

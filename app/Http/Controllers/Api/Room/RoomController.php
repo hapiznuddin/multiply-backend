@@ -43,16 +43,27 @@ class RoomController extends Controller
     }
 
 
-    public function start(Room $room): JsonResponse
-    {
-        if ($room->user_id !== Auth::id()) {
-            return response()->json(['message' => 'Forbidden'], 403);
-        }
-
-        return response()->json(
-            $this->service->start($room)
-        );
+public function start(Room $room): JsonResponse
+{
+    // Only owner can start
+    if ($room->user_id !== Auth::id()) {
+        return response()->json(['message' => 'Forbidden'], 403);
     }
+
+    // Room must be active before starting
+    // if ($room->status !== 'active') {
+    //     return response()->json([
+    //         'message' => 'Room must be active before starting'
+    //     ], 422);
+    // }
+
+    $updatedRoom = $this->service->start($room);
+
+    return response()->json([
+        'message' => 'Room started',
+        'room'    => $updatedRoom
+    ]);
+}
 
     public function finish(Room $room): JsonResponse
     {

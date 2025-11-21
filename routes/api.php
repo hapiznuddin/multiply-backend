@@ -29,6 +29,8 @@ use App\Http\Controllers\Api\Room\LeaderboardController;
             Route::get('/', [RoomController::class, 'index']);
             Route::post('/', [RoomController::class, 'store']);
             Route::get('/{room}', [RoomController::class, 'show']);
+            Route::post('/{room}/start', [RoomController::class, 'start']);
+            Route::post('/{room}/finish', [RoomController::class, 'finish']);
             Route::get('/{room}/questions', [RoomController::class, 'questions']);
         });
     });
