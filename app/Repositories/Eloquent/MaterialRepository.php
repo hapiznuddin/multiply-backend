@@ -30,6 +30,8 @@ class MaterialRepository implements MaterialRepositoryInterface
 
     public function getByTeacher(string $teacherId)
     {
-        return Material::where('user_id', $teacherId)->get();
+        return Material::where('user_id', $teacherId)
+        ->withCount('questions')
+        ->get();
     }
 }
