@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\Room\LeaderboardController;
         Route::apiResource('questions', QuestionController::class);
         Route::apiResource('question-sets', QuestionSetController::class);
         Route::model('material', \App\Models\Material::class);
+        Route::get('material/{material}/questions', [QuestionController::class, 'byMaterial']);
         Route::get('material/{material}/questions/multiple-choice', [QuestionController::class, 'multipleChoice']);
         Route::get('material/{material}/questions/input', [QuestionController::class, 'input']);
         Route::prefix('rooms')->group(function () {

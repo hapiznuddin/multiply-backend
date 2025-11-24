@@ -29,19 +29,37 @@ class QuestionController extends Controller
         return response()->json($q->load('options'));
     }
 
-public function multipleChoice(Material $material)
-{
-    return response()->json(
-        $this->service->getMultipleChoiceByMaterial($material)
-    );
-}
+    public function byMaterial(Material $material): JsonResponse
+    {
+        $material->load(['questions.options']);
 
-public function input(Material $material)
-{
-    return response()->json(
-        $this->service->getInputByMaterial($material)
-    );
-}
+        return response()->json([
+            'material'  => $material->withCount('questions')->first(),
+            'questions' => $material->questions
+        ]);
+    }
+
+    public function byQuestionByMaterial(Material $material): JsonResponse
+    {
+        $questions = $material->questions()->with('options')->get();
+
+        return response()->json($questions);
+    }
+
+
+    public function multipleChoice(Material $material)
+    {
+        return response()->json(
+            $this->service->getMultipleChoiceByMaterial($material)
+        );
+    }
+
+    public function input(Material $material)
+    {
+        return response()->json(
+            $this->service->getInputByMaterial($material)
+        );
+    }
 
     public function update(CreateQuestionRequest $request, $id): JsonResponse
     {
