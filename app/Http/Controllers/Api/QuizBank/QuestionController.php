@@ -32,9 +32,10 @@ class QuestionController extends Controller
     public function byMaterial(Material $material): JsonResponse
     {
         $material->load(['questions.options']);
+        $material->loadCount('questions');
 
         return response()->json([
-            'material'  => $material->withCount('questions')->first(),
+            'material'  => $material->makeHidden('questions'),
             'questions' => $material->questions
         ]);
     }
