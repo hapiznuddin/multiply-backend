@@ -77,6 +77,6 @@ class QuestionController extends Controller
         $this->service->delete($q);
         return response()->json([
             'message' => 'Question deleted successfully',
-        ], 204);
+        ], 200);
     }
 }

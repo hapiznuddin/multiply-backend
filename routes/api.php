@@ -23,12 +23,15 @@ use App\Http\Controllers\Api\Room\LeaderboardController;
         Route::apiResource('questions', QuestionController::class);
         Route::apiResource('question-sets', QuestionSetController::class);
         Route::model('material', \App\Models\Material::class);
+        Route::get('materials/count', [MaterialController::class, 'getCountMaterial']);
         Route::get('material/{material}/questions', [QuestionController::class, 'byMaterial']);
         Route::get('material/{material}/questions/multiple-choice', [QuestionController::class, 'multipleChoice']);
         Route::get('material/{material}/questions/input', [QuestionController::class, 'input']);
+        Route::delete('question/{id}', [QuestionController::class,'destroy']);
         Route::prefix('rooms')->group(function () {
             Route::get('/', [RoomController::class, 'index']);
             Route::post('/', [RoomController::class, 'store']);
+            Route::get('/count', [RoomController::class, 'getRoomCount']);
             Route::get('/{room}', [RoomController::class, 'show']);
             Route::post('/{room}/start', [RoomController::class, 'start']);
             Route::post('/{room}/finish', [RoomController::class, 'finish']);

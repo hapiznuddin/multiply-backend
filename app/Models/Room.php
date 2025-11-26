@@ -8,7 +8,7 @@ class Room extends Model
 {
     protected $fillable = [
         'user_id',
-        'question_set_id',
+        'material_id',
         'code',
         'status',
         'starts_at',
@@ -29,9 +29,9 @@ class Room extends Model
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
-    public function questionSet()
+    public function material()
     {
-        return $this->belongsTo(QuestionSet::class);
+        return $this->belongsTo(Material::class);
     }
 
     public function participants()

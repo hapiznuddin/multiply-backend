@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\QuizBank;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QuizBank\CreateMaterialRequest;
+use App\Models\Material;
 use App\Services\QuizBank\MaterialService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,12 @@ class MaterialController extends Controller
         return response()->json([
             'message' => 'Material deleted successfully',
         ], 204);
+    }
+
+    public function getCountMaterial(): JsonResponse
+    {
+        $count = Material::where('user_id', Auth::user()->id)->count();
+        return response()->json($count);
     }
 }
 

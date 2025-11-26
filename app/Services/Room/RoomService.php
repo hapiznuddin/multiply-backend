@@ -22,6 +22,7 @@ class RoomService
         
         return $this->rooms->create($data);
     }
+    
     public function generateCode(): string
     {
         do {
@@ -48,7 +49,7 @@ class RoomService
 
     public function listForUser(string $userId)
     {
-        return Room::where('user_id', $userId)->get();
+        return Room::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
     }
 
     public function start(Room $room): Room
@@ -69,13 +70,11 @@ class RoomService
 
     public function getQuestions(Room $room)
     {
-        return $room->questionSet
-        ->materials()
-        ->with(['questions.options' => function ($q) {
-            $q->select('id', 'question_id', 'option_text', 'option_text');
+        return $room->material
+        ->questions()
+        ->with(['options' => function ($q) {
+            $q->select('id', 'question_id', 'option_text');
         }])
-        ->get()
-        ->flatMap->questions
-        ->values();
+        ->get();
     }
 }

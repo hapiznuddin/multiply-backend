@@ -38,7 +38,7 @@ class RoomController extends Controller
     public function show(Room $room): JsonResponse
     {
         return response()->json(
-            $room->load('questionSet.materials')
+            $room->load('material')
         );
     }
 
@@ -76,47 +76,49 @@ public function start(Room $room): JsonResponse
         );
     }
 
-public function questions(Room $room): JsonResponse
-{
-    $questions = $room->questionSet
-        ->materials()
-        ->with([
-            'questions' => function ($q) {
-                $q->select(
-                    'questions.id',
-                    'questions.material_id',
-                    'questions.question_text',
-                    'questions.type'
-                );
-            },
-            'questions.options' => function ($o) {
-                $o->select(
-                    'question_options.id',
-                    'question_options.question_id',
-                    'question_options.option_text'
-                );
-            }
-        ])
-        ->get()
-        ->flatMap->questions
-        ->values()
-        ->map(function ($q, $index) {
-            return [
-                'id' => $q->id,
-                'index' => $index,
-                'question_text' => $q->question_text,
-                'type' => $q->type,
-                'options' => $q->options->map(fn($op) => [
-                    'id' => $op->id,
-                    'option_text' => $op->option_text
-                ])
-            ];
-        });
+    public function questions(Room $room): JsonResponse
+    {
+        $questions = $room->material
+            ->questions()
+            ->with([
+                'options' => function ($o) {
+                    $o->select(
+                        'question_options.id',
+                        'question_options.question_id',
+                        'question_options.option_text'
+                    );
+                }
+            ])
+            ->select(
+                'questions.id',
+                'questions.material_id',
+                'questions.question_text',
+                'questions.type'
+            )
+            ->get()
+            ->map(function ($q, $index) {
+                return [
+                    'id' => $q->id,
+                    'index' => $index,
+                    'question_text' => $q->question_text,
+                    'type' => $q->type,
+                    'options' => $q->options->map(fn($op) => [
+                        'id' => $op->id,
+                        'option_text' => $op->option_text
+                    ])
+                ];
+            });
 
     return response()->json([
         'room_id' => $room->id,
         'questions' => $questions
     ]);
 }
+
+    public function getRoomCount(): JsonResponse
+    {
+        $count = Room::where('user_id', Auth::id())->count();
+        return response()->json($count);
+    }
 }
 
