@@ -27,4 +27,16 @@ class RoomRepository implements RoomRepositoryInterface
     {
         return Room::find($id);
     }
+
+    public function getRoomWithQuestions(int $id): ?Room
+    {
+        return Room::with(['material.questions.options' => function ($query) {
+            $query->select('id', 'question_id', 'option_text', 'is_correct');
+        }])->find($id);
+    }
+
+    public function destroy(Room $room): bool
+    {
+        return $room->delete();
+    }       
 }

@@ -68,13 +68,19 @@ class RoomService
         ]);
     }
 
-    public function getQuestions(Room $room)
+    public function getQuestions(int $roomId)
     {
-        return $room->material
-        ->questions()
-        ->with(['options' => function ($q) {
-            $q->select('id', 'question_id', 'option_text');
-        }])
-        ->get();
+        $room = $this->rooms->getRoomWithQuestions($roomId);
+
+        if (!$room || !$room->material) {
+            return collect();
+        }
+
+        return $room->material->questions;
+    }
+
+    public function destroy(Room $room): bool
+    {
+        return $this->rooms->destroy($room);
     }
 }

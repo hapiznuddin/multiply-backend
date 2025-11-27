@@ -36,6 +36,7 @@ use App\Http\Controllers\Api\Room\LeaderboardController;
             Route::post('/{room}/start', [RoomController::class, 'start']);
             Route::post('/{room}/finish', [RoomController::class, 'finish']);
             Route::get('/{room}/questions', [RoomController::class, 'questions']);
+            Route::delete('/{room}', [RoomController::class, 'destroy']);
         });
     });
 

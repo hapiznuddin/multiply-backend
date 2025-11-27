@@ -13,4 +13,8 @@ interface RoomRepositoryInterface
     public function findByCode(string $code): ?Room;
 
     public function findById(int $id): ?Room;
+
+    public function getRoomWithQuestions(int $id): ?Room;
+
+    public function destroy(Room $room): bool;
 }
