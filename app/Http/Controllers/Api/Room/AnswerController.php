@@ -32,16 +32,12 @@ class AnswerController extends Controller
 
         $question = Question::findOrFail($request->question_id);
 
-        // Validate question belongs to room
-        $validQuestionIds = $room->questionSet
-            ->materials()
-            ->with('questions')
-            ->get()
-            ->flatMap->questions
-            ->pluck('id')
-            ->toArray();
+        // Validate question belongs to room's material
+        if (!$room->material) {
+            return response()->json(['message' => 'Room has no material assigned'], 403);
+        }
 
-        if (!in_array($question->id, $validQuestionIds)) {
+        if ($question->material_id !== $room->material_id) {
             return response()->json(['message' => 'This question does not belong to this room'], 403);
         }
 
@@ -52,11 +48,19 @@ class AnswerController extends Controller
             rawAnswer: $request->answer
         );
 
+        // Get correct answer for multiple choice
+        $correctAnswerId = null;
+        if ($question->type === 'multiple_choice') {
+            $correctOption = $question->options()->where('is_correct', true)->first();
+            $correctAnswerId = $correctOption ? $correctOption->id : null;
+        }
+
         return response()->json([
-            'message'      => 'Answer recorded',
-            'answer'       => $result['answer'],
-            'total_score'  => $result['total_score'],
-            'current_rank' => $result['rank'],
+            'message'           => 'Answer recorded',
+            'answer'            => $result['answer'],
+            'total_score'       => $result['total_score'],
+            'current_rank'      => $result['rank'],
+            'correct_answer_id' => $correctAnswerId,
         ], 201);
     }
 }

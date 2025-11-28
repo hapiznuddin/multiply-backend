@@ -30,6 +30,7 @@ class ParticipantController extends Controller
         'room_id'          => $room->id,
         'participant_name' => $request->participant_name,
         'guest_token'      => Str::uuid(),
+        'score'            => 0,
         'joined_at'        => now(),
     ]);
 
@@ -37,5 +38,15 @@ class ParticipantController extends Controller
         'message' => 'Joined successfully',
         'participant' => $participant
     ], 201);
+    }
+
+    public function exit(RoomParticipant $participant): JsonResponse
+    {
+        // Delete the participant record
+        $participant->delete();
+
+        return response()->json([
+            'message' => 'Successfully exited the room'
+        ], 200);
     }
 }

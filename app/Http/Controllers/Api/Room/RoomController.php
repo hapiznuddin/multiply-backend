@@ -86,6 +86,34 @@ public function start(Room $room): JsonResponse
         ]);
     }
 
+    public function gameQuestions(Room $room): JsonResponse
+    {
+        // Fetch questions using the service
+        $questions = $this->service->getQuestions($room->id);
+
+        // Sanitize questions to hide answers
+        $sanitizedQuestions = $questions->map(function ($question) {
+            return [
+                'id' => $question->id,
+                'question_text' => $question->question_text,
+                'type' => $question->type,
+                'options' => $question->options->map(function ($option) {
+                    return [
+                        'id' => $option->id,
+                        'option_text' => $option->option_text,
+                        // 'is_correct' is intentionally omitted
+                    ];
+                }),
+                // 'correct_answer' is intentionally omitted
+            ];
+        });
+
+        return response()->json([
+            'room' => $room->makeHidden(['teacher', 'participants', 'answers']), // Hide sensitive room info if necessary
+            'questions' => $sanitizedQuestions
+        ]);
+    }
+
     public function getRoomCount(): JsonResponse
     {
         $count = Room::where('user_id', Auth::id())->count();

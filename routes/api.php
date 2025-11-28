@@ -42,6 +42,8 @@ use App\Http\Controllers\Api\Room\LeaderboardController;
 
     // Public endpoints (students can call)
     Route::post('rooms/join', [ParticipantController::class, 'join']); // join without auth
-    Route::post('rooms/{room}/answers', [AnswerController::class, 'submit']); // submit answer
-    Route::get('rooms/{room}/questions', [RoomController::class, 'questions']); // get room questions
-    Route::get('rooms/{room}/leaderboard', [LeaderboardController::class, 'index']); // get room leaderboard
+    Route::delete('rooms/participants/{participant}/exit', [ParticipantController::class, 'exit']); // exit room
+    Route::post('rooms/{room}/game/answers', [AnswerController::class, 'submit']); // submit answer
+    Route::get('rooms/{room}/game/questions', [RoomController::class, 'gameQuestions']); // get room questions
+    Route::get('rooms/{room}/game/leaderboard', [LeaderboardController::class, 'index']); // get room leaderboard
+    Route::get('rooms/{room}/game/answers', [AnswerController::class, 'index']); // get room answers
