@@ -10,6 +10,7 @@ use App\Services\Room\ParticipantService;
 use App\Repositories\Contracts\RoomRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class ParticipantController extends Controller
 {
@@ -48,5 +49,14 @@ class ParticipantController extends Controller
         return response()->json([
             'message' => 'Successfully exited the room'
         ], 200);
+    }
+
+    public function getCount(): JsonResponse
+    {
+        $count = RoomParticipant::whereHas('room', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->count();
+
+        return response()->json($count);
     }
 }
