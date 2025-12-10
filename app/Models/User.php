@@ -78,4 +78,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Room::class);
     }
+
+    public function learningModules()
+    {
+        return $this->hasMany(LearningModule::class, 'user_id', 'id');
+    }
 }

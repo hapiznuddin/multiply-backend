@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Room\RoomController;
 use App\Http\Controllers\Api\Room\ParticipantController;
 use App\Http\Controllers\Api\Room\AnswerController;
 use App\Http\Controllers\Api\Room\LeaderboardController;
+use App\Http\Controllers\Api\LearningCorner\LearningModuleController;
 
     // --------------- Register and Login ----------------//
     Route::post('register', [AuthController::class, 'register']);
@@ -22,6 +23,7 @@ use App\Http\Controllers\Api\Room\LeaderboardController;
         Route::apiResource('materials', MaterialController::class)->except(['show']);
         Route::apiResource('questions', QuestionController::class);
         Route::apiResource('question-sets', QuestionSetController::class);
+        Route::apiResource('learning-modules', LearningModuleController::class);
         Route::model('material', \App\Models\Material::class);
         Route::get('materials/count', [MaterialController::class, 'getCountMaterial']);
         Route::get('material/{material}/questions', [QuestionController::class, 'byMaterial']);
