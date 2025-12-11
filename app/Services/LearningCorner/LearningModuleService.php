@@ -31,6 +31,11 @@ class LearningModuleService
         return $this->modules->findById($id);
     }
 
+    public function getAll()
+    {
+        return $this->modules->getAll();
+    }
+
     public function getByTeacher(string $teacherId)
     {
         return $this->modules->getByTeacher($teacherId);

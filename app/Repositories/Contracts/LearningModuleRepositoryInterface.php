@@ -14,5 +14,7 @@ interface LearningModuleRepositoryInterface
 
     public function findById(int $id): ?LearningModule;
 
+    public function getAll();
+
     public function getByTeacher(string $teacherId);
 }

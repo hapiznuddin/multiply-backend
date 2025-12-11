@@ -15,8 +15,7 @@ class LearningModuleController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $teacherId = $request->user()->id;
-        $modules = $this->service->getByTeacher($teacherId);
+        $modules = $this->service->getAll();
         return response()->json($modules);
     }
 

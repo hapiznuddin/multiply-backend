@@ -25,12 +25,20 @@ class LearningModuleRepository implements LearningModuleRepositoryInterface
 
     public function findById(int $id): ?LearningModule
     {
-        return LearningModule::find($id);
+        return LearningModule::with('user')->find($id);
+    }
+
+    public function getAll()
+    {
+        return LearningModule::with('user')
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     public function getByTeacher(string $teacherId)
     {
-        return LearningModule::where('user_id', $teacherId)
+        return LearningModule::with('user')
+            ->where('user_id', $teacherId)
             ->orderBy('created_at', 'desc')
             ->get();
     }
