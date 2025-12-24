@@ -20,6 +20,11 @@ class RoomParticipant extends Model
 
     public function answers()
     {
-        return $this->hasMany(RoomAnswer::class, 'participant_id');
+        return $this->hasMany(RoomAnswer::class, 'room_participant_id');
+    }
+
+    public function achievements()
+    {
+        return $this->hasMany(UserAchievement::class);
     }
 }

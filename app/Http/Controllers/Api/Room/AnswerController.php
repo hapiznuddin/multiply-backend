@@ -45,7 +45,8 @@ class AnswerController extends Controller
         $result = $this->answers->storeAnswer(
             participant: $participant,
             question: $question,
-            rawAnswer: $request->answer
+            rawAnswer: $request->answer,
+            timeTaken: $request->time_taken
         );
 
         // Get correct answer for multiple choice
@@ -60,6 +61,9 @@ class AnswerController extends Controller
             'answer'            => $result['answer'],
             'total_score'       => $result['total_score'],
             'current_rank'      => $result['rank'],
+            'current_streak'    => $result['current_streak'],
+            'speed_bonus'       => $result['speed_bonus'],
+            'new_achievements'  => $result['new_achievements'],
             'correct_answer_id' => $correctAnswerId,
         ], 201);
     }

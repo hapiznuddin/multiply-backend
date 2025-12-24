@@ -25,6 +25,7 @@ class SubmitAnswerRequest extends FormRequest
             'guest_token' => 'required|string',
             'room_participant_id' => 'required|integer|exists:room_participants,id',
             'question_id' => 'required|integer|exists:questions,id',
+            'time_taken' => 'nullable|integer',
 
             // answer dynamic: MCQ = integer option_id but stored as string, input = string
             'answer' => ['required', function ($attribute, $value, $fail) {

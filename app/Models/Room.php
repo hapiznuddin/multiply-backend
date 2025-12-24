@@ -15,7 +15,8 @@ class Room extends Model
         'started_at',
         'finished_at',
         'title',
-        'max_players'
+        'max_players',
+        'time_limit_per_question'
     ];
 
     protected $casts = [

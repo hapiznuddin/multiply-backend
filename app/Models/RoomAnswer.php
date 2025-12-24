@@ -20,7 +20,7 @@ class RoomAnswer extends Model
 
     public function participant()
     {
-        return $this->belongsTo(RoomParticipant::class, 'participant_id');
+        return $this->belongsTo(RoomParticipant::class, 'room_participant_id');
     }
 
     public function question()

@@ -10,12 +10,13 @@ use App\Http\Controllers\Api\Room\RoomController;
 use App\Http\Controllers\Api\Room\ParticipantController;
 use App\Http\Controllers\Api\Room\AnswerController;
 use App\Http\Controllers\Api\Room\LeaderboardController;
+use App\Http\Controllers\Api\Room\AchievementController;
 use App\Http\Controllers\Api\LearningCorner\LearningModuleController;
 
     // --------------- Register and Login ----------------//
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login'])->middleware('throttle:login');
-    
+
     // ------------------ Get Data ----------------------//
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('logout', [AuthController::class, 'logOut']);
@@ -41,11 +42,15 @@ use App\Http\Controllers\Api\LearningCorner\LearningModuleController;
             Route::get('/{room}/questions', [RoomController::class, 'questions']);
             Route::delete('/{room}', [RoomController::class, 'destroy']);
         });
+
+        // Achievements (Authenticated/Teachers)
+        Route::get('achievements', [AchievementController::class, 'index']);
     });
 
     // Public endpoints (students can call)
     Route::post('rooms/join', [ParticipantController::class, 'join']); // join without auth
     Route::delete('rooms/participants/{participant}/exit', [ParticipantController::class, 'exit']); // exit room
+    Route::get('rooms/participants/{participant}/achievements', [AchievementController::class, 'userAchievements']); // get participant achievements
     Route::post('rooms/{room}/game/answers', [AnswerController::class, 'submit']); // submit answer
     Route::get('rooms/{room}/game/questions', [RoomController::class, 'gameQuestions']); // get room questions
     Route::get('rooms/{room}/game/leaderboard', [LeaderboardController::class, 'index']); // get room leaderboard
