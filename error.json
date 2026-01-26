@@ -1,0 +1,345 @@
+{
+    "message": "SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Try again (Connection: mysql, SQL: select * from `rooms` where `id` = 1 limit 1)",
+    "exception": "Illuminate\\Database\\QueryException",
+    "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+    "line": 824,
+    "trace": [
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+            "line": 978,
+            "function": "runQueryCallback",
+            "class": "Illuminate\\Database\\Connection",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+            "line": 957,
+            "function": "tryAgainIfCausedByLostConnection",
+            "class": "Illuminate\\Database\\Connection",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+            "line": 780,
+            "function": "handleQueryException",
+            "class": "Illuminate\\Database\\Connection",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+            "line": 397,
+            "function": "run",
+            "class": "Illuminate\\Database\\Connection",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+            "line": 3188,
+            "function": "select",
+            "class": "Illuminate\\Database\\Connection",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+            "line": 3173,
+            "function": "runSelect",
+            "class": "Illuminate\\Database\\Query\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+            "line": 3763,
+            "function": "Illuminate\\Database\\Query\\{closure}",
+            "class": "Illuminate\\Database\\Query\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+            "line": 3172,
+            "function": "onceWithColumns",
+            "class": "Illuminate\\Database\\Query\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php",
+            "line": 902,
+            "function": "get",
+            "class": "Illuminate\\Database\\Query\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php",
+            "line": 884,
+            "function": "getModels",
+            "class": "Illuminate\\Database\\Eloquent\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Concerns/BuildsQueries.php",
+            "line": 366,
+            "function": "get",
+            "class": "Illuminate\\Database\\Eloquent\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
+            "line": 2209,
+            "function": "first",
+            "class": "Illuminate\\Database\\Eloquent\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Routing/ImplicitRouteBinding.php",
+            "line": 60,
+            "function": "resolveRouteBinding",
+            "class": "Illuminate\\Database\\Eloquent\\Model",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 980,
+            "function": "resolveForRoute",
+            "class": "Illuminate\\Routing\\ImplicitRouteBinding",
+            "type": "::"
+        },
+        {
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 982,
+            "function": "call_user_func"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php",
+            "line": 41,
+            "function": "substituteImplicitBindings",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 219,
+            "function": "handle",
+            "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 137,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 821,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 800,
+            "function": "runRouteWithinStack",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 764,
+            "function": "runRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 753,
+            "function": "dispatchToRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+            "line": 200,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "Illuminate\\Foundation\\Http\\{closure}",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php",
+            "line": 31,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 219,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php",
+            "line": 51,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 219,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php",
+            "line": 27,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 219,
+            "function": "handle",
+            "class": "Illuminate\\Http\\Middleware\\ValidatePostSize",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php",
+            "line": 109,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 219,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php",
+            "line": 61,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 219,
+            "function": "handle",
+            "class": "Illuminate\\Http\\Middleware\\HandleCors",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php",
+            "line": 58,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 219,
+            "function": "handle",
+            "class": "Illuminate\\Http\\Middleware\\TrustProxies",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php",
+            "line": 22,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 219,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php",
+            "line": 26,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 219,
+            "function": "handle",
+            "class": "Illuminate\\Http\\Middleware\\ValidatePathEncoding",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 137,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+            "line": 175,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+            "line": 144,
+            "function": "sendRequestThroughRouter",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php",
+            "line": 1220,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/public/index.php",
+            "line": 20,
+            "function": "handleRequest",
+            "class": "Illuminate\\Foundation\\Application",
+            "type": "->"
+        },
+        {
+            "file": "/home/hapiz/Documents/Project/Multiply_Quiz/multiply-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php",
+            "line": 23,
+            "function": "require_once"
+        }
+    ]
+}
